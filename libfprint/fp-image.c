@@ -298,6 +298,31 @@ fp_image_detect_minutiae_thread_func (GTask        *task,
   lfsparms = g_memdup (&g_lfsparms_V2, sizeof (LFSPARMS));
   lfsparms->remove_perimeter_pts = data->flags & FPI_IMAGE_PARTIAL ? TRUE : FALSE;
 
+  if ((data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_ISLANDS_AND_LAKES) &&
+      (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_HOLES))
+    lfsparms->max_rmtest_dist = 0;
+
+  if (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_HOOKS)
+    lfsparms->max_hook_len = 0;
+
+  if (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_ISLANDS_AND_LAKES)
+    lfsparms->max_half_loop = 0;
+
+  if (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_HOLES)
+    lfsparms->small_loop_len = 0;
+
+  if (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_OVERLAPS)
+    {
+      lfsparms->max_overlap_dist = 0;
+      lfsparms->max_overlap_join_dist = 0;
+    }
+
+  if (data->flags & FPI_IMAGE_MINDTCT_DISABLE_REMOVE_MALFORMATIONS)
+    {
+      lfsparms->min_malformation_ratio = INT_MAX;
+      lfsparms->max_malformation_dist = INT_MAX;
+    }
+
   timer = g_timer_new ();
   r = get_minutiae (&minutiae, &quality_map, &direction_map,
                     &low_contrast_map, &low_flow_map, &high_curve_map,
