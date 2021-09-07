@@ -10,7 +10,7 @@ Not really, so far my rates are:
 
 but I've only tested this with my own fingers and device.
 
-
+Require fprintd 1.92.0  or ealier, 1.94.0 breaks something
 
 \* from Tuxedo dev Werner Sembach, see [related gitlab MR](https://gitlab.freedesktop.org/libfprint/libfprint/-/merge_requests/198)
 
