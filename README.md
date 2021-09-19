@@ -5,7 +5,7 @@ This is a libfprint copy with some tweaks\* and (ugly) hacks to make the fingerp
 Is it really insecure ?
 Not really, so far my rates are:
 
-- False positive (insecure) : 0%
+- False positive (insecure) : 1%
 - False negative (inconvenient) : 20%
 
 but I've only tested this with my own fingers and device.
